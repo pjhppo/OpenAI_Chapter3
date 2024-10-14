@@ -1,0 +1,131 @@
+using System.Collections;
+using System.Text;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+public class TranslatorManager : MonoBehaviour
+{
+    public static TranslatorManager Instance;
+    private string currentPrompt = "다음 언어로 번역을 해주세요 : English";
+    private const string apiUrl = "https://api.openai.com/v1/chat/completions";
+    private string apiKey = "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";
+
+    public Dropdown dropdown;
+    private string[] laguages = { "English", "Korean", "Japanese", "Chinese" };
+
+    public Text uiText;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        WhisperManager.Instance.OnReceivedWhisper += RecievedWhisper;
+
+        SetLanguageChange();
+    }
+
+    private void RecievedWhisper(string transcribedText)
+    {
+        Debug.Log(transcribedText);
+        StartCoroutine(SendOpenAIRequest(currentPrompt, transcribedText, uiText));
+    }
+
+    private void SetLanguageChange()
+    {
+        // 기존 Dropdown 옵션을 초기화합니다.
+        dropdown.ClearOptions();
+
+        // 마이크 목록을 Dropdown 옵션 형식으로 변환합니다.
+        List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+
+        foreach (string language in laguages)
+        {
+            options.Add(new Dropdown.OptionData(language));
+        }
+
+        // 변환된 옵션을 Dropdown에 추가합니다.
+        dropdown.AddOptions(options);
+
+        // Dropdown의 값이 변경될 때마다 호출되는 이벤트를 추가합니다.
+        dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(dropdown); });
+    }
+
+    void DropdownValueChanged(Dropdown change)
+    {
+        currentPrompt = "다음 언어로 번역 :" + change.options[change.value].text;
+        Debug.Log(currentPrompt);
+    }
+
+    // OpenAI API에 요청을 보내는 코루틴 함수
+    public IEnumerator SendOpenAIRequest(string prompt, string message, Text resultText)
+    {
+        // JSON 형식의 데이터를 생성
+        string jsonData = @"{
+            ""model"": ""gpt-4o"",
+            ""messages"": [
+                {
+                    ""role"": ""system"",
+                    ""content"": """ + prompt + @"""
+                },
+                {
+                    ""role"": ""user"",
+                    ""content"": """ + message + @"""
+                }
+            ]
+        }";
+
+        // UTF-8 인코딩으로 JSON 데이터를 바이트 배열로 변환
+        byte[] postData = Encoding.UTF8.GetBytes(jsonData);
+
+        // UnityWebRequest를 사용하여 POST 요청을 생성
+        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
+        {
+            // 요청 헤더 설정
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + apiKey);
+
+            // 요청 데이터 설정
+            request.uploadHandler = new UploadHandlerRaw(postData);
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            // 요청 전송
+            yield return request.SendWebRequest();
+
+            // 에러 핸들링
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + request.error);
+            }
+            else
+            {
+                // 응답 처리
+                string responseText = request.downloadHandler.text;
+                Debug.Log("Response: " + responseText);
+
+                // 응답 데이터에서 assistant의 메시지 추출
+                var responseData = JsonUtility.FromJson<OpenAIResponse>(responseText);
+                if (responseData.choices != null && responseData.choices.Length > 0)
+                {
+                    string assistantMessage = responseData.choices[0].message.content;
+                    resultText.text = assistantMessage;
+                }
+                else
+                {
+                    Debug.LogWarning("No valid response from the assistant.");
+                }
+            }
+        }
+    }
+}

@@ -8,12 +8,27 @@ using System;
 
 public class WhisperManager : MonoBehaviour
 {
+    public static WhisperManager Instance;
     public Toggle recordToggle;
     private AudioClip clip;
     private SetMicrophone setMicrophoneScript;
     private bool isRecording = false;
     private int duration = 300; // 최대 녹음 시간 (초)
     private string filename = "recordedAudio.wav";
+    private string url = "https://api.openai.com/v1/audio/transcriptions";
+    public string apiKey = "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";
+    public event Action<string> OnReceivedWhisper;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -90,9 +105,6 @@ public class WhisperManager : MonoBehaviour
 
     IEnumerator SendWhisperRequest(string filepath)
     {
-        string apiKey = "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"; // 자신의 OpenAI API 키로 변경하세요.
-        string url = "https://api.openai.com/v1/audio/transcriptions";
-
         // 오디오 파일을 바이트 배열로 읽어옵니다.
         byte[] audioData = File.ReadAllBytes(filepath);
 
@@ -120,8 +132,7 @@ public class WhisperManager : MonoBehaviour
                 var jsonResponse = JsonUtility.FromJson<WhisperResponse>(responseText);
                 string transcribedText = jsonResponse.text;
                 Debug.Log("인식된 텍스트: " + transcribedText);
-
-                // 필요한 경우, 인식된 텍스트를 UI에 표시하거나 다른 로직에 활용할 수 있습니다.
+                OnReceivedWhisper?.Invoke(transcribedText);
             }
             catch (Exception e)
             {
@@ -134,7 +145,6 @@ public class WhisperManager : MonoBehaviour
         }
     }
 
-    // Whisper API 응답 형식을 나타내는 클래스
     [Serializable]
     public class WhisperResponse
     {
