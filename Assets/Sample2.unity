@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 144520549}
   - component: {fileID: 144520550}
   m_Layer: 0
-  m_Name: Controller
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d350dcb202ed34e1aa7713b01772dbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  apiKey: 
   currentPrompt: "\uC785\uB825\uB41C \uD14D\uC2A4\uD2B8\uB97C \uAE30\uBC18\uC73C\uB85C
     \uD68C\uC758\uB85D \uC791\uC131. \uAD6C\uC870\uB294 \uD68C\uC758 \uC81C\uBAA9,
     \uB0A0\uC9DC \uBC0F \uC7A5\uC18C, \uC8FC\uC694 \uC758\uC81C, \uD68C\uC758\uB0B4\uC6A9,
@@ -438,7 +439,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2027059976}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999748
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -811,7 +812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00019602774}
+  m_AnchoredPosition: {x: 0, y: 0.000353458}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2027059975

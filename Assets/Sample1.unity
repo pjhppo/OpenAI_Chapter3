@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 144520547}
   - component: {fileID: 144520549}
   m_Layer: 0
-  m_Name: Controller
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordToggle: {fileID: 4452622809819566177}
+  apiKey: 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
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
