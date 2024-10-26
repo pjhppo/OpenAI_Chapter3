@@ -81,7 +81,7 @@ public class OpenAIManager : MonoBehaviour
                 Debug.Log("Response: " + responseText);
 
                 // 응답 데이터에서 assistant의 메시지 추출
-                var responseData = JsonUtility.FromJson<OpenAIResponse>(responseText);
+                var responseData = JsonUtility.FromJson<TextGenerationResponse>(responseText);
                 if (responseData.choices != null && responseData.choices.Length > 0)
                 {
                     string assistantMessage = responseData.choices[0].message.content;
@@ -97,7 +97,7 @@ public class OpenAIManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class OpenAIResponse
+public class TextGenerationResponse
 {
     public Choice[] choices;
 }
