@@ -2,13 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Collections;
-using System.Text;
 using UnityEngine.Networking;
 using System;
 
 public class WhisperManager : MonoBehaviour
 {
-    public static WhisperManager Instance;
     public Toggle recordToggle;
     private AudioClip clip;
     private SetMicrophone setMicrophoneScript;
@@ -16,8 +14,16 @@ public class WhisperManager : MonoBehaviour
     private int duration = 300; // 최대 녹음 시간 (초)
     private string filename = "recordedAudio.wav";
     private string url = "https://api.openai.com/v1/audio/transcriptions";
-    public string apiKey = "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";
+    public string apiKey;
     public event Action<string> OnReceivedWhisper;
+
+    [Serializable]
+    public class WhisperResponse
+    {
+        public string text;
+    }
+
+    public static WhisperManager Instance;
     private void Awake()
     {
         if (Instance == null)
@@ -145,9 +151,5 @@ public class WhisperManager : MonoBehaviour
         }
     }
 
-    [Serializable]
-    public class WhisperResponse
-    {
-        public string text;
-    }
+
 }
