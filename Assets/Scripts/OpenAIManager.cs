@@ -6,13 +6,11 @@ using UnityEngine.UI;
 
 public class OpenAIManager : MonoBehaviour
 {
-    private const string apiUrl = "https://api.openai.com/v1/chat/completions";
-    public static OpenAIManager Instance;
+    private const string apiUrl = "https://api.openai.com/v1/chat/completions";    
     public string apiKey;
     public string currentPrompt = "입력된 텍스트를 기반으로 회의록 작성. 구조는 회의 제목, 날짜 및 장소, 주요 의제, 회의내용, 주요 논의 사항 등 요약";
-    public Text uiText;
-    
-    
+    public Text uiText;    
+    public static OpenAIManager Instance;
 
     private void Awake()
     {
