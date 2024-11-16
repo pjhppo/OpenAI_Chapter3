@@ -337,7 +337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 144520546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ae8ddf47fbc48e99966415f9b63583, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5d4b45a4a424ad58051c0ccff4b35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   recordToggle: {fileID: 59953659}

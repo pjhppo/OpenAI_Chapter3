@@ -28,7 +28,7 @@ public class TranslatorManager : MonoBehaviour
 
     private void Start()
     {
-        WhisperManager.Instance.OnReceivedWhisper += RecievedWhisper;
+        WhisperManagerLanguageDetect.Instance.OnReceivedWhisper += RecievedWhisper;
 
         InitializeDropdown();
     }
