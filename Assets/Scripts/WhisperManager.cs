@@ -16,6 +16,8 @@ public class WhisperManager : MonoBehaviour
     private string url = "https://api.openai.com/v1/audio/transcriptions";
     public string apiKey;
     public event Action<string> OnReceivedWhisper;
+    public event Action OnStartRecording;
+    public event Action OnStopRecording;
 
     [Serializable]
     public class WhisperResponse
@@ -75,6 +77,7 @@ public class WhisperManager : MonoBehaviour
             clip = Microphone.Start(setMicrophoneScript.currentMicrophone, false, duration, 44100);
             isRecording = true;
             Debug.Log($"녹음을 시작합니다: {setMicrophoneScript.currentMicrophone}");
+            OnStartRecording?.Invoke();
         }
     }
 
@@ -89,6 +92,7 @@ public class WhisperManager : MonoBehaviour
 
             // 오디오 클립을 .wav 파일로 저장합니다.
             SaveClip();
+            OnStopRecording?.Invoke();
         }
     }
 
