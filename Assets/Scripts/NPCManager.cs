@@ -2,11 +2,10 @@ using System.Collections;
 using UnityEngine;
 
 public class NPCManager : MonoBehaviour
-{
-    public static NPCManager Instance; // 싱글톤 인스턴스
+{    
     public Animator anim; // NPC의 애니메이터
-
     public GameObject balloon; //말풍선 프리팹
+    public static NPCManager Instance; // 싱글톤 인스턴스
 
     private void Awake()
     {
@@ -24,14 +23,14 @@ public class NPCManager : MonoBehaviour
 
     private void Start()
     {
-        // WhisperManager의 OnReceivedWhisper 이벤트에 StartTalk 메서드를 구독합니다.
-        WhisperManager.Instance.OnReceivedWhisper += StartTalk;
-
         // WhisperManager에서 녹음이 시작되면 OnInputFieldChanged 메서드가 호출됩니다.
         WhisperManager.Instance.OnStartRecording += OnInputFieldChanged;
 
         // WhisperManager에서 녹음이 중지되면 OnInputFieldSubmit 메서드가 호출됩니다.
         WhisperManager.Instance.OnStopRecording += OnInputFieldSubmit;
+        
+        // WhisperManager의 OnReceivedWhisper 이벤트에 StartTalk 메서드를 구독합니다.
+        OpenAIManager.Instance.OnReceivedMessage += StartTalk;
     }
 
     // InputField에서 입력이 발생했을 때 호출되는 메서드
@@ -49,7 +48,7 @@ public class NPCManager : MonoBehaviour
         anim.SetTrigger("think");
     }
 
-    private void StartTalk(string message)
+    private void StartTalk()
     {
         StartCoroutine(TalkThenIdle());
     }
