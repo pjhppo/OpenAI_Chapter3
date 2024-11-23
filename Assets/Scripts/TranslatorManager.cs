@@ -62,7 +62,7 @@ public class TranslatorManager : MonoBehaviour
 
     void DropdownValueChanged(Dropdown change)
     {
-        currentPrompt = "다음 언어로 번역 :" + change.options[change.value].text;
+        currentPrompt = "다음 언어로 번역을 해주세요 :" + change.options[change.value].text;
         Debug.Log(currentPrompt);
     }
 
