@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -42,8 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -183,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordToggle: {fileID: 2031479086}
-  apiKey: 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
+  apiKey: 
 --- !u!114 &144520550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d350dcb202ed34e1aa7713b01772dbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apiKey: 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
+  apiKey: 
   currentPrompt: "\uC785\uB825\uB41C \uD14D\uC2A4\uD2B8\uB97C \uAE30\uBC18\uC73C\uB85C
     \uD68C\uC758\uB85D \uC791\uC131. \uAD6C\uC870\uB294 \uD68C\uC758 \uC81C\uBAA9,
     \uB0A0\uC9DC \uBC0F \uC7A5\uC18C, \uC8FC\uC694 \uC758\uC81C, \uD68C\uC758\uB0B4\uC6A9,
@@ -304,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7009113950011941657, guid: e31d44172c3a94c1794e1d84d1f05ef5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00034272403
+      value: 0.0009618514
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

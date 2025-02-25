@@ -7,11 +7,11 @@ using System.IO;
 
 public class GPT4PostProcessing : MonoBehaviour
 {
-    public string openaiApiKey = "YOUR_API_KEY"; // 여기서 YOUR_API_KEY를 실제 OpenAI API 키로 교체하세요.
+    public string openaiApiKey = "YOUR_API_KEY"; // OpenAI API 키를 여기에 입력하세요.
     private static string whisperApiUrl = "https://api.openai.com/v1/audio/transcriptions";
     private static string chatApiUrl = "https://api.openai.com/v1/chat/completions";
 
-    public string audioFilePath = "Assets/Audio/audio.wav"; // 음성인식할 오디오 파일의 경로를 지정하세요.
+    public string audioFilePath = "Assets/Audio/Postprocessing.mp3"; // 음성인식할 오디오 파일의 경로를 지정하세요.
 
     void Start()
     {

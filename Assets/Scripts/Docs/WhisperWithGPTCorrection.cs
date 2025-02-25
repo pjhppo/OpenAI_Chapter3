@@ -7,18 +7,18 @@ using System.Text;
 
 public class WhisperWithGPTCorrection : MonoBehaviour
 {
-    private string openaiApiKey = "YOUR_API_KEY"; // 발급받은 OpenAI API 키를 입력하세요.
+    private string openaiApiKey = "YOUR_API_KEY"; // OpenAI API 키를 여기에 입력하세요.
     private string whisperApiUrl = "https://api.openai.com/v1/audio/transcriptions";
     private string chatApiUrl = "https://api.openai.com/v1/chat/completions";
 
     public string audioFilePath = "Assets/Audio/speech.mp3"; // 오디오 파일의 경로를 지정하세요.
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(ProcessAudio());
     }
 
-    IEnumerator ProcessAudio()
+    private IEnumerator ProcessAudio()
     {
         // 1. Whisper API로 오디오 전사
         string transcriptionText = "";

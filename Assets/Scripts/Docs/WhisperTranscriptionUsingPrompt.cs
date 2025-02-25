@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class WhisperTranscription : MonoBehaviour
+public class WhisperTranscriptionUsingPrompt : MonoBehaviour
 {
     private string apiUrl = "https://api.openai.com/v1/audio/transcriptions";
     public string apiKey = "YOUR_API_KEY"; // OpenAI API 키를 여기에 입력하세요.
-    public string audioFilePath = "Assets/Audio/audio.mp3"; // 오디오 파일 경로
+    public string audioFilePath = "Assets/Audio/Postprocessing.mp3"; // 오디오 파일 경로
 
     private void Start()
     {
@@ -21,8 +21,12 @@ public class WhisperTranscription : MonoBehaviour
 
         // 폼 데이터 생성
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        formData.Add(new MultipartFormFileSection("file", audioData, "audio.mp3", "audio/mpeg"));
+        formData.Add(new MultipartFormFileSection("file", audioData, "Postprocessing.mp3", "audio/mpeg"));
         formData.Add(new MultipartFormDataSection("model", "whisper-1"));
+
+        // 프롬프트 추가
+        string promptText = "ZyntriQix, Digique Plus, CynapseFive, VortiQore V8, EchoNix Array, " + "OrbitalLink Seven, DigiFractal Matrix, PULSE, RAPT, B.R.I.C.K., " + "Q.U.A.R.T.Z., F.L.I.N.T.";
+        formData.Add(new MultipartFormDataSection("prompt", promptText));
 
         // 요청 생성
         UnityWebRequest www = UnityWebRequest.Post(apiUrl, formData);

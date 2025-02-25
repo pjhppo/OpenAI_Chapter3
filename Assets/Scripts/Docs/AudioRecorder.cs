@@ -8,7 +8,8 @@ public class AudioRecorder : MonoBehaviour
     IEnumerator StartRecording()
     {
         string microphone = Microphone.devices[0]; // 마이크 입력 장치 이름 가져오기
-                                                   // 녹음 시작
+        
+        // 녹음 시작
         recordedClip = Microphone.Start(microphone, false, maxRecordingTime, 44100);
         Debug.Log("Recording started...");
         yield return new WaitForSeconds(maxRecordingTime); // 최대 녹음 시간까지 대기      
