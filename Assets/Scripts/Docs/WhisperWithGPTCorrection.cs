@@ -11,7 +11,7 @@ public class WhisperWithGPTCorrection : MonoBehaviour
     private string whisperApiUrl = "https://api.openai.com/v1/audio/transcriptions";
     private string chatApiUrl = "https://api.openai.com/v1/chat/completions";
 
-    public string audioFilePath = "Assets/Audio/speech.mp3"; // 오디오 파일의 경로를 지정하세요.
+    public string audioFilePath = "Assets/Audio/Postprocessing.mp3"; // 오디오 파일의 경로를 지정하세요.
 
     private void Start()
     {
