@@ -126,4 +126,23 @@ public class TranslatorManager : MonoBehaviour
             }
         }
     }
+    
+    [System.Serializable]
+    public class TextGenerationResponse
+    {
+        public Choice[] choices;
+    }
+
+    [System.Serializable]
+    public class Choice
+    {
+        public Message message;
+    }
+
+    [System.Serializable]
+    public class Message
+    {
+        public string content;
+    }
 }
+
