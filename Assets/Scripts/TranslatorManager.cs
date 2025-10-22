@@ -53,13 +53,6 @@ public class TranslatorManager : MonoBehaviour
         dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(dropdown); });
     }
 
-    void OnDropdownValueChanged(Dropdown change)
-    {
-        // 선택된 언어의 이름으로 targetLanguage 업데이트
-        currentPrompt = "다음 언어로 번역을 해주세요 :" + change.options[change.value].text;
-        Debug.Log($"선택된 언어: {change.value}");
-    }
-
     void DropdownValueChanged(Dropdown change)
     {
         currentPrompt = "다음 언어로 번역을 해주세요 :" + change.options[change.value].text;
